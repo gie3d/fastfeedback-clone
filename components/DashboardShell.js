@@ -13,13 +13,12 @@ import {
 import LogoIcon from './LogoIcon';
 import { useAuth } from '@/lib/auth';
 
+import AddSiteModal from '@/components/AddSiteModal';
+
 const DashboardShell = ({ children }) => {
   const auth = useAuth();
 
-  if (!auth.user) {
-    return <Text>Loading...</Text>;
-  }
-  console.log(auth.user);
+  // console.log(auth.user);
   return (
     <>
       <Flex
@@ -35,7 +34,7 @@ const DashboardShell = ({ children }) => {
         </HStack>
         <Flex justifyContent="flex-end" alignItems="center">
           <Link mr={4}>Account</Link>
-          <Avatar src={auth.user.photoUrl} size="sm" />
+          <Avatar src={auth.user?.photoUrl} size="sm" />
         </Flex>
       </Flex>
       <Flex
@@ -59,9 +58,12 @@ const DashboardShell = ({ children }) => {
               </BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
-          <Heading size="lg" as="h2" mb={2}>
-            Sites
-          </Heading>
+          <Flex justifyContent="space-between">
+            <Heading size="lg" as="h2" mb={2}>
+              Sites
+            </Heading>
+            <AddSiteModal>+ Add Site</AddSiteModal>
+          </Flex>
           {children}
         </Flex>
       </Flex>
